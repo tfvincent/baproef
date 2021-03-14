@@ -8,10 +8,12 @@
 #include <vector>
 #include <algorithm>
 
-void addData(vector<vector<int>>&, vector<int>&)
+using namespace std;
 
-void printVector(vector<int> const& )
+void addData(vector<vector<int>>&, vector<int>&);
 
-void printTable(vector<vector<int>>const &)
+void printVector(vector<int> const &);
+
+void printTable(vector<vector<int>>const &);
 
 #endif

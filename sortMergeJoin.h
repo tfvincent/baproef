@@ -12,6 +12,6 @@
 
 #include "vectorUtil.h"
 
-void sortMergeJoin(vector<vector<int>>&, vector<vector<int>>&, int)
+void sortMergeJoin(vector<vector<int>>&, vector<vector<int>>&, int);
 
 #endif

@@ -39,6 +39,7 @@ void sortMergeJoin(vector<vector<int>>& table1, vector<vector<int>>& table2, int
 
   printf("RESULT: \n");
   do {
+      printf("%d \n", table2idx);
 
     if (mark == 999) {
       while(copyTable1[table1idx][key] < copyTable2[table2idx][key]) {
@@ -62,7 +63,7 @@ void sortMergeJoin(vector<vector<int>>& table1, vector<vector<int>>& table2, int
       mark = 999;
     }
   }
-  while (table1idx < copyTable1.size());
+  while (!table1idx < copyTable1.size() && table2idx < copyTable2.size());
 
   printTable(result);
 

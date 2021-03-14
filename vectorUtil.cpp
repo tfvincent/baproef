@@ -9,6 +9,8 @@
 
 #include "vectorUtil.h"
 
+using namespace std;
+
 void addData(vector<vector<int>>& vec, vector<int>& input){
   vec.push_back(input);
 }

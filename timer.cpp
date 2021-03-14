@@ -2,6 +2,8 @@
 #include <memory>
 #include <chrono>
 
+using namespace std;
+
 class Timer {
   public:
     Timer(const char* name)
