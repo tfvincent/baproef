@@ -9,12 +9,14 @@
 
 #include "vectorUtil.h"
 #include "nestedLoopJoin.h"
+#include "timer.h"
 
 void nestedLoopJoin(vector<vector<int>> table1, vector<vector<int>> table2, int key) {
-  printf("NESTEDLOOPJOIN: \n");
-  printTable(table1);
-  printTable(table2);
-  printf("RESULT: \n");
+  Timer timer("Nested_loop_join");
+  //printf("NESTEDLOOPJOIN: \n");
+  //printTable(table1);
+  //printTable(table2);
+  //printf("RESULT: \n");
   vector<vector<int>> result;
   for(int i=0; i < table1.size(); i++){
     for(int j=0; j < table2.size(); j++){
@@ -27,5 +29,5 @@ void nestedLoopJoin(vector<vector<int>> table1, vector<vector<int>> table2, int 
       }
     }
   }
-  printTable(result);
+  //printTable(result);
 }

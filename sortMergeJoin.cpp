@@ -9,18 +9,20 @@
 
 #include "vectorUtil.h"
 #include "sortMergeJoin.h"
+#include "timer.h"
 
 void sortMergeJoin(vector<vector<int>>& table1, vector<vector<int>>& table2, int key) {
-  printf("SORTMERGEJOIN: \n");
+    Timer timer("Sort_merge_join");
+  //printf("SORTMERGEJOIN: \n");
   vector<vector<int>> copyTable1;
   vector<vector<int>> copyTable2;
   vector<vector<int>> result;
   copy(table1.begin(), table1.end(), back_inserter(copyTable1));
   copy(table2.begin(), table2.end(), back_inserter(copyTable2));
 
-  printf("BEFORE SORTING: \n");
-  printTable(copyTable1);
-  printTable(copyTable2);
+  //printf("BEFORE SORTING: \n");
+  //printTable(copyTable1);
+  //printTable(copyTable2);
 
   sort(copyTable1.begin(), copyTable1.end(), [key](const vector<int>& a, const vector<int>& b) {
   return a[key] < b[key];
@@ -29,9 +31,9 @@ void sortMergeJoin(vector<vector<int>>& table1, vector<vector<int>>& table2, int
   return a[key] < b[key];
   });
 
-  printf("AFTER SORTING: \n");
-  printTable(copyTable1);
-  printTable(copyTable2);
+  //printf("AFTER SORTING: \n");
+  //printTable(copyTable1);
+  //printTable(copyTable2);
 
   int mark = 999;
   int table1idx = 0;
@@ -39,7 +41,6 @@ void sortMergeJoin(vector<vector<int>>& table1, vector<vector<int>>& table2, int
 
   printf("RESULT: \n");
   do {
-      printf("%d \n", table2idx);
 
     if (mark == 999) {
       while(copyTable1[table1idx][key] < copyTable2[table2idx][key]) {
@@ -65,6 +66,6 @@ void sortMergeJoin(vector<vector<int>>& table1, vector<vector<int>>& table2, int
   }
   while (!table1idx < copyTable1.size() && table2idx < copyTable2.size());
 
-  printTable(result);
+  //printTable(result);
 
 }

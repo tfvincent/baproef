@@ -9,6 +9,7 @@
 
 #include "nestedLoopJoin.h"
 #include "sortMergeJoin.h"
+#include "timer.h"
 
 using namespace std;
 

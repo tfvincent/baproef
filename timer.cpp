@@ -1,39 +1,29 @@
 #include <iostream>
 #include <memory>
 #include <chrono>
+#include <cmath>
+#include "timer.h"
 
 using namespace std;
 
-class Timer {
-  public:
-    Timer(const char* name)
-    : m_Name(name), m_Stopped(false){
-      m_StartTimepoint = std::chrono::high_resolution_clock::now();
+Timer::Timer(const char* name): m_Name(name), m_Stopped(false){
+    m_StartTimepoint = chrono::high_resolution_clock::now();
+}
+
+Timer::~Timer(){
+    if (!m_Stopped) {
+        Stop();
     }
+}
+void Timer::Stop(){
 
-    ~Timer(){
-        if (!m_Stopped) {
-            Stop();
-        }
-    }
+  auto endTimePoint = chrono::high_resolution_clock::now();
 
-    void Stop(){
+  long long start = chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
+  long long stop = chrono::time_point_cast<std::chrono::microseconds>(endTimePoint).time_since_epoch().count();
 
-      auto endTimePoint = std::chrono::high_resolution_clock::now();
+  auto duration = (stop - start);
+  cout << m_Name << ": " << duration << "ms\n";
 
-      long long start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
-      long long stop = std::chrono::time_point_cast<std::chrono::microseconds>(endTimePoint).time_since_epoch().count();
-
-      auto duration = end - start;
-      double ms = duration * 0.001;
-
-      std::cout << duration << "us(" << ms << "ms)\n";
-
-      m_Stopped = true;
-    }
-
-  private:
-    const char* m_Name;
-    std::chrono::time_point< std::chrono::high_resolution_clock> m_StartTimepoint;
-    bool m_Stopped;
+  m_Stopped = true;
 }
