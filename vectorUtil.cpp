@@ -11,10 +11,6 @@
 
 using namespace std;
 
-void addData(vector<vector<int>>& vec, vector<int>& input){
-  vec.push_back(input);
-}
-
 void printVector(vector<int> const &input){
 
   printf("|");
@@ -24,6 +20,19 @@ void printVector(vector<int> const &input){
   printf("\n");
 }
 
+pair<int, int> findKeys(vector<vector<int>>& table1, vector<vector<int>>& table2){
+    pair<int, int> result;
+    for(int s = 0; s < table1[0].size(); s++) {
+        for (int p = 0; p < table2[0].size(); p++) {
+            if (table1[0][s] == table2[0][p]) {
+                pair<int, int> key;
+                result.first = s;
+                result.second = p;
+            }
+        }
+    }
+    return result;
+}
 void printTable(vector<vector<int>> const &input){
   for (int i = 0; i < input.size(); i++){
     printVector(input[i]);

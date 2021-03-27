@@ -11,19 +11,16 @@ Timer::Timer(const char* name): m_Name(name), m_Stopped(false){
 }
 
 Timer::~Timer(){
-    if (!m_Stopped) {
-        Stop();
-    }
 }
-void Timer::Stop(){
+unsigned long long Timer::Stop(){
 
   auto endTimePoint = chrono::high_resolution_clock::now();
 
-  long long start = chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
-  long long stop = chrono::time_point_cast<std::chrono::microseconds>(endTimePoint).time_since_epoch().count();
+  unsigned long long start = chrono::time_point_cast<std::chrono::nanoseconds>(m_StartTimepoint).time_since_epoch().count();
+  unsigned long long stop = chrono::time_point_cast<std::chrono::nanoseconds>(endTimePoint).time_since_epoch().count();
 
   auto duration = (stop - start);
-  cout << m_Name << ": " << duration << "ms\n";
 
   m_Stopped = true;
+    return duration;
 }

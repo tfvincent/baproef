@@ -12,6 +12,6 @@
 
 #include "vectorUtil.h"
 
-void sortMergeJoin(vector<vector<int>>&, vector<vector<int>>&, int);
+unsigned long long sortMergeJoin(vector<vector<int>>, vector<vector<int>>);
 
-#endif
+#endif //BAPROEF_SORTMERGEJOIN_H

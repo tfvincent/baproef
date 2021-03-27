@@ -9,6 +9,6 @@
 #include "vectorUtil.h"
 
 
-void nestedLoopJoin(vector<vector<int>>, vector<vector<int>>, int);
+vector<vector<int>> nestedLoopJoin(vector<vector<int>>, vector<vector<int>>);
 
 #endif

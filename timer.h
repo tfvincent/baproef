@@ -14,7 +14,7 @@ public:
     Timer(const char* name);
     ~Timer();
 
-    void Stop();
+    unsigned long long Stop();
 
 private:
     const char* m_Name;

@@ -12,6 +12,8 @@ using namespace std;
 
 void addData(vector<vector<int>>&, vector<int>&);
 
+pair<int,int> findKeys(vector<vector<int>>&, vector<vector<int>>&);
+
 void printVector(vector<int> const &);
 
 void printTable(vector<vector<int>>const &);

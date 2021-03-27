@@ -11,23 +11,25 @@
 #include "nestedLoopJoin.h"
 #include "timer.h"
 
-void nestedLoopJoin(vector<vector<int>> table1, vector<vector<int>> table2, int key) {
-  Timer timer("Nested_loop_join");
-  //printf("NESTEDLOOPJOIN: \n");
-  //printTable(table1);
-  //printTable(table2);
-  //printf("RESULT: \n");
-  vector<vector<int>> result;
-  for(int i=0; i < table1.size(); i++){
-    for(int j=0; j < table2.size(); j++){
-      if (table1[i][key] == table2[j][key]){
-        vector<int> match;
-        copy(table1[i].begin(), table1[i].end(), back_inserter(match));
-        match.insert(match.end(), table2[j].begin(), table2[j].end());
-        match.erase(match.begin() + key, match.begin() + (key +1));
-        result.push_back(match);
-      }
+using namespace std;
+vector<vector<int>> nestedLoopJoin(vector<vector<int>> table1, vector<vector<int>> table2) {
+    pair<int, int> keys = findKeys(table1, table2);
+    vector<vector<int>> result;
+    result.reserve(50);
+    Timer timer("Nested_loop_join");
+    for(int i=0; i < table1.size(); i++){
+        for(int j=0; j < table2.size(); j++){
+            if (table1[i][keys.first] == table2[j][keys.second]){
+                vector<int> match;
+                match.reserve(5);
+                copy(table1[i].begin(), table1[i].end(), back_inserter(match));
+                match.insert(match.end(), table2[j].begin(), table2[j].end());
+                match.erase(match.begin() + keys.first, match.begin() + (keys.first +1));
+                result.push_back(match);
+            }
+        }
     }
-  }
-  //printTable(result);
+    //printTable(result);
+    //unsigned long long duration = timer.Stop();
+    return result;
 }
