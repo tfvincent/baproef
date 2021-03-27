@@ -1,17 +1,20 @@
-all: main.o nestedLoopJoin.o sortMergeJoin.o vectorUtil.o timer.o
-	g++ main.o nestedLoopJoin.o sortMergeJoin.o vectorUtil.o timer.o -lSDL2 -o main
+all: main.o nestedLoopJoin.o sortMergeJoin.o vectorUtil.o timer.o join.o
+	g++ -ggdb main.o nestedLoopJoin.o sortMergeJoin.o vectorUtil.o join.o timer.o -lSDL2 -o main
 
-main.o: main.cpp nestedLoopJoin.h sortMergeJoin.h timer.h
-	g++ -c main.cpp -o main.o
+main.o: main.cpp nestedLoopJoin.h sortMergeJoin.h timer.h join.h
+	g++ -ggdb -c main.cpp -o main.o
+
+join.o: join.cpp join.h vectorUtil.h timer.h nestedLoopJoin.h
+	g++ -ggdb -c join.cpp -o join.o
 
 nestedLoopJoin.o: nestedLoopJoin.cpp nestedLoopJoin.h vectorUtil.h timer.h
-	g++ -c nestedLoopJoin.cpp -o nestedLoopJoin.o
+	g++ -ggdb -c nestedLoopJoin.cpp -o nestedLoopJoin.o
 
 sortMergeJoin.o: sortMergeJoin.cpp sortMergeJoin.h vectorUtil.h timer.h
-	g++ -c sortMergeJoin.cpp -o sortMergeJoin.o
+	g++ -ggdb -c sortMergeJoin.cpp -o sortMergeJoin.o
 
 vectorUtil.o: vectorUtil.cpp
-	g++ -c vectorUtil.cpp -o vectorUtil.o
+	g++ -ggdb -c vectorUtil.cpp -o vectorUtil.o
 
 timer.o: timer.cpp
-	g++ -c timer.cpp -o timer.o
+	g++ -ggdb -c timer.cpp -o timer.o
