@@ -11,27 +11,27 @@
 #include "sortMergeJoin.h"
 #include "timer.h"
 
-unsigned long long sortMergeJoin(vector<vector<int>> table1, vector<vector<int>> table2) {
+unsigned long long sortMergeJoin(Table table1, Table table2) {
 
   //printf("SORTMERGEJOIN: \n");
-  vector<vector<int>> copyTable1;
+  Table copyTable1;
 
-  vector<vector<int>> copyTable2;
-  vector<vector<int>> presult;
+  Table copyTable2;
+  Table presult;
 
   copy(table1.begin(), table1.end(), back_inserter(copyTable1));
   copy(table2.begin(), table2.end(), back_inserter(copyTable2));
-  pair<int, int> keys = findKeys(table1, table2);
+  Pair keys = findKeys(table1, table2);
   //printf("BEFORE SORTING: \n");
   //printTable(copyTable1);
   //printTable(copyTable2);
   Timer timer("Sort_merge_join");
 
-  sort(copyTable1.begin(), copyTable1.end(), [keys](const vector<int>& a, const vector<int>& b) {
+  sort(copyTable1.begin(), copyTable1.end(), [keys](const Tuple& a, const Tuple& b) {
   return a[keys.first] < b[keys.first];
   });
 
-  sort(copyTable2.begin(), copyTable2.end(), [keys](const vector<int>& a, const vector<int>& b) {
+  sort(copyTable2.begin(), copyTable2.end(), [keys](const Tuple& a, const Tuple& b) {
   return a[keys.second] < b[keys.second];
   });
   //printf("AFTER SORTING: \n");
@@ -53,11 +53,11 @@ unsigned long long sortMergeJoin(vector<vector<int>> table1, vector<vector<int>>
       mark = table2idx;
     }
     if (copyTable1[table1idx][keys.first] == copyTable2[table2idx][keys.second]) {
-      vector<int> match;
+      Tuple match;
       match.reserve(5);
       copy(copyTable1[table1idx].begin(), copyTable1[table1idx].end(), back_inserter(match));
       match.insert(match.end(), copyTable2[table2idx].begin(), copyTable2[table2idx].end());
-      //match.erase(match.begin() + key, match.begin() + (key +1));
+      match.erase(match.begin() + keys.first, match.begin() + (keys.first +1));
       presult.push_back(match);
       table2idx += 1;
     } else {

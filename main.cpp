@@ -17,9 +17,9 @@ using namespace std;
 
 int main(){
 
-  vector<vector<int>> grades1;
-  vector<vector<int>> grades2;
-  vector<vector<int>> grades3;
+  Table grades1;
+  Table grades2;
+  Table grades3;
 
   grades1 = {
             {1, 0},
@@ -42,6 +42,7 @@ int main(){
             {31, 1},
             {8, 8},
             {4, 4}};
+
     unsigned long long avgJoinTime;
 
     for (int i = 0; i < 10000; ++i) {

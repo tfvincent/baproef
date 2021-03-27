@@ -19,26 +19,25 @@
 using namespace std;
 
 
-vector<vector<vector<int>>> findQueryPlan(vector<vector<int>> relation1, vector<vector<int>> relation2, vector<vector<int>> relation3){
-    vector<vector<vector<int>>> queryPlan;
+QueryPlan findQueryPlan(Table relation1, Table relation2, Table relation3){
+    QueryPlan queryPlan;
     queryPlan.push_back(relation1);
     queryPlan.push_back(relation2);
     queryPlan.push_back(relation3);
-    sort(queryPlan.begin(), queryPlan.end(), [] (vector<vector<int>> a, vector<vector<int>> b){
+    sort(queryPlan.begin(), queryPlan.end(), [] (Table a, Table b){
     return a[0] < b[0];
     });
     return queryPlan;
 }
 
 
-unsigned long long join(vector<vector<int>> relation1, vector<vector<int>> relation2, vector<vector<int>> relation3){
+unsigned long long join(Table relation1, Table relation2, Table relation3){
     Timer timer("Joining query");
-    vector<vector<vector<int>>>queryPlan = findQueryPlan(relation1, relation2, relation3);
-    vector<vector<int>> result = queryPlan[0];
+    QueryPlan queryPlan = findQueryPlan(relation1, relation2, relation3);
+    Table result = queryPlan[0];
     for (int i = 1; i < queryPlan.size(); ++i) {
         result = nestedLoopJoin(result, queryPlan[i]);
     }
     unsigned long long duration = timer.Stop();
-    printTable(result);
     return duration;
 }

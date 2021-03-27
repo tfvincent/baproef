@@ -14,9 +14,9 @@
 #include <iomanip>
 #include <list>
 
-list<vector<vector<int>>> findQueryPlan(vector<vector<int>>, vector<vector<int>>, vector<vector<int>>);
+QueryPlan findQueryPlan(Table, Table, Table);
 
-unsigned long long join(vector<vector<int>>, vector<vector<int>>, vector<vector<int>>);
+unsigned long long join(Table, Table, Table);
 
 
 #endif //BAPROEF_JOIN_H

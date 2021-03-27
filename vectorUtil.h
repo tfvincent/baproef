@@ -9,13 +9,17 @@
 #include <algorithm>
 
 using namespace std;
+typedef vector<int> Tuple;
+typedef vector<vector<int>> Table;
+typedef vector<vector<vector<int>>> QueryPlan;
+typedef pair<int, int> Pair;
 
-void addData(vector<vector<int>>&, vector<int>&);
+void addData(Table&, Tuple&);
 
-pair<int,int> findKeys(vector<vector<int>>&, vector<vector<int>>&);
+Pair findKeys(Table&, Table&);
 
-void printVector(vector<int> const &);
+void printVector(Tuple const &);
 
-void printTable(vector<vector<int>>const &);
+void printTable(Table const &);
 
 #endif
