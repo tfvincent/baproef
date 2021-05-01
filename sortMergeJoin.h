@@ -12,6 +12,6 @@
 
 #include "vectorUtil.h"
 
-unsigned long long sortMergeJoin(vector<vector<int>>, vector<vector<int>>);
+Table sortMergeJoin(vector<vector<int>>, vector<vector<int>>);
 
 #endif //BAPROEF_SORTMERGEJOIN_H

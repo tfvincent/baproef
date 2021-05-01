@@ -12,8 +12,27 @@
 #include "sortMergeJoin.h"
 #include "timer.h"
 #include "join.h"
-
+#include "btree.h"
+#include "set.h"
+#include "map.h"
+typedef btree::map<int, int> IntMap;
 using namespace std;
+
+int CountDuplicates() {
+    IntMap iset;
+    iset[42] = 43;
+    for (int i = 2; i < 20; ++i) {
+        iset[i] = 43;
+    }
+    for (int i = 2; i < 43; ++i) {
+        cout << iset[i] << "\n";
+    }
+
+    auto iterator69 = iset.find(41);
+    iterator69.operator++();
+    assert(iterator69->second == 43);
+    return 2;
+}
 
 int main(){
 
@@ -44,11 +63,15 @@ int main(){
             {4, 4}};
 
     unsigned long long avgJoinTime;
+    avgJoinTime = join(grades1, grades2, grades3);
+    //for (int i = 0; i < 10000; ++i) {
+      //  avgJoinTime = avgJoinTime + join(grades1, grades2, grades3);
+    //}
+    cout<<setprecision (7) <<"Average time nested loop join: "<< avgJoinTime << "µs\n";
 
-    for (int i = 0; i < 10000; ++i) {
-        avgJoinTime = avgJoinTime + join(grades1, grades2, grades3);
-    }
-    cout<<setprecision (7) <<"Average time nested loop join: "<< avgJoinTime/10000 << "µs\n";
+    auto newIndex = makeIndex(grades1, 1);
+    auto iterator69 = newIndex.find(44);
+    printVector(*iterator69->second);
 
-    return 1;
+    return 0;
 }

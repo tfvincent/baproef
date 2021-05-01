@@ -11,9 +11,9 @@
 #include "sortMergeJoin.h"
 #include "timer.h"
 
-unsigned long long sortMergeJoin(Table table1, Table table2) {
+Table sortMergeJoin(Table table1, Table table2) {
 
-  //printf("SORTMERGEJOIN: \n");
+  printf("SORTMERGEJOIN: \n");
   Table copyTable1;
 
   Table copyTable2;
@@ -22,9 +22,9 @@ unsigned long long sortMergeJoin(Table table1, Table table2) {
   copy(table1.begin(), table1.end(), back_inserter(copyTable1));
   copy(table2.begin(), table2.end(), back_inserter(copyTable2));
   Pair keys = findKeys(table1, table2);
-  //printf("BEFORE SORTING: \n");
-  //printTable(copyTable1);
-  //printTable(copyTable2);
+  printf("BEFORE SORTING: \n");
+  printTable(copyTable1);
+  printTable(copyTable2);
   Timer timer("Sort_merge_join");
 
   sort(copyTable1.begin(), copyTable1.end(), [keys](const Tuple& a, const Tuple& b) {
@@ -34,9 +34,9 @@ unsigned long long sortMergeJoin(Table table1, Table table2) {
   sort(copyTable2.begin(), copyTable2.end(), [keys](const Tuple& a, const Tuple& b) {
   return a[keys.second] < b[keys.second];
   });
-  //printf("AFTER SORTING: \n");
-  //printTable(copyTable1);
-  //printTable(copyTSable2);
+  printf("AFTER SORTING: \n");
+  printTable(copyTable1);
+  printTable(copyTable2);
   int mark = 999;
   int table1idx = 1;
   int table2idx = 1;
@@ -69,6 +69,6 @@ unsigned long long sortMergeJoin(Table table1, Table table2) {
   while (table1idx < copyTable1.size() && table2idx < copyTable2.size());
 
   long long duration = timer.Stop();
-  return duration;
+  return presult;
 
 }
