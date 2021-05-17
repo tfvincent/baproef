@@ -7,4 +7,6 @@
 #include "vectorUtil.h"
 #include "HyperGraph.h"
 
-Table genericJoin(HyperGraph, Tuple, int);
+HyperGraph * generateHyperGraph(vector<Table>&);
+
+ Table genericJoin(HyperGraph *, vector<Table >&, int);

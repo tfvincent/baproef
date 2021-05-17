@@ -11,7 +11,7 @@ class HyperGraph {
 
 public:
 
-    vector<Table> vertices;
+    vector<int> vertices;
     vector<Tuple> edgeSets;
 
     int size();

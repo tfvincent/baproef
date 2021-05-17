@@ -6,6 +6,10 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_executable(baproef
+        leapfrog_triejoin.h
+        leapfrog_triejoin.cpp
+        leapfrog_join.h
+        leapfrog_join.cpp
         iterator_interface.cpp
         iterator_interface.h
         btree.h

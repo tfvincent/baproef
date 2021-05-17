@@ -11,24 +11,23 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94bfb4c4-4fd4-4700-ab99-30540a76f2af" name="Default Changelist" comment="Added Type Aliases">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HyperGraph.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HyperGraph.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/iterator_interface.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/iterator_interface.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leapfrog_join.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/baproef.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/join.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/join.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main" beforeDir="false" afterPath="$PROJECT_DIR$/main" afterDir="false" />
+    <list default="true" id="94bfb4c4-4fd4-4700-ab99-30540a76f2af" name="Default Changelist" comment="Added Generic Join and Leapfrog join">
+      <change afterPath="$PROJECT_DIR$/.idea/baproef2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Trie.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Trie.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leapfrog_join.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leapfrog_triejoin.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leapfrog_triejoin.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HyperGraph.h" beforeDir="false" afterPath="$PROJECT_DIR$/HyperGraph.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/genericJoin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/genericJoin.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/genericJoin.h" beforeDir="false" afterPath="$PROJECT_DIR$/genericJoin.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iterator_interface.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/iterator_interface.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iterator_interface.h" beforeDir="false" afterPath="$PROJECT_DIR$/iterator_interface.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leapfrog_join.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/leapfrog_join.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seg.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sortMergeJoin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/sortMergeJoin.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sortMergeJoin.h" beforeDir="false" afterPath="$PROJECT_DIR$/sortMergeJoin.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vectorUtil.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/vectorUtil.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vectorUtil.h" beforeDir="false" afterPath="$PROJECT_DIR$/vectorUtil.h" afterDir="false" />
     </list>
@@ -62,17 +61,19 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/ba_vincent_fixed" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="language.cpp.clang-tidy" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
@@ -80,14 +81,14 @@
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="baproef" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="baproef" TARGET_NAME="baproef" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="baproef" RUN_TARGET_NAME="baproef">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="baproef" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="baproef" TARGET_NAME="baproef" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="baproef" RUN_TARGET_NAME="baproef">
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -109,7 +110,13 @@
       <workItem from="1618942705093" duration="75000" />
       <workItem from="1618942814942" duration="27000" />
       <workItem from="1618942845541" duration="824000" />
-      <workItem from="1619697758214" duration="20060000" />
+      <workItem from="1619697758214" duration="20726000" />
+      <workItem from="1620125892158" duration="865000" />
+      <workItem from="1620582882754" duration="9526000" />
+      <workItem from="1620643877643" duration="18477000" />
+      <workItem from="1620674449586" duration="15925000" />
+      <workItem from="1620754039074" duration="1012000" />
+      <workItem from="1621164604597" duration="16408000" />
     </task>
     <task id="LOCAL-00001" summary="debugged and added new makefile">
       <created>1615731052083</created>
@@ -146,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616866367763</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added Generic Join and Leapfrog join">
+      <created>1619882616329</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1619882616329</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,17 +184,11 @@
     <MESSAGE value="Changed hard coded index to variable search&#10;Added benchmarking" />
     <MESSAGE value="Added queryplan&#10;Added support for joins of 3 relations" />
     <MESSAGE value="Added Type Aliases" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Type Aliases" />
+    <MESSAGE value="Added Generic Join and Leapfrog join" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Generic Join and Leapfrog join" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/vectorUtil.cpp</url>
-          <line>46</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

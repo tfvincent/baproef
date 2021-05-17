@@ -5,16 +5,17 @@
 #include "map.h"
 #include "vectorUtil.h"
 
-bool atEnd(IndexMap::iterator& iter, IndexMap index){
-    return iter.key() == index.end();
+bool isNotAtEnd(IndexMap::iterator& iter, IndexMap index){
+    return iter.key() <= index.end().key();
 }
 
-void seek(int seekKey, IndexMap::iterator& iter, IndexMap index) {
-    while (seekKey > iter.key() && !atEnd(iter, index)) {
-        iter.operator++();
+void seek(int seekKey, IndexMap::iterator * iter, IndexMap * index) {
+    while (seekKey > iter->key() && *iter != index->end()) {
+        iter->operator++();
+    }
+
+    if (*iter == index->end()) {
+        iter--;
+        printf("At end\n");
     }
 }
-
-
-
-
