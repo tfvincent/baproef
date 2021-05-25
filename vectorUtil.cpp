@@ -6,22 +6,18 @@
 
 #include "vectorUtil.h"
 #include "map.h"
+
 using namespace std;
 
 //https://www.softwaretestinghelp.com/trees-in-cpp/#:~:text=A%20tree%20is%20a%20collection,but%20only%20one%20parent%20node.
-//declaration for new tree node
-struct node  {
-    int data;
-    vector<struct node *> children;
-};
-
 //allocates new node
-struct node* newNode(int data) {
+struct node* newNode(int data, struct node * parent, int var, int index) {
     // declare and allocate new node
     struct node* node = new struct node();
-
+    node->index = index;
+    node->var = var;
+    node->parent = parent;
     node->data = data;    // Assign data to this node
-
     return(node);
 }
 
@@ -129,6 +125,22 @@ Index * makeIndex(Table* table, int variable){
 void printTable(Table const &input){
     for (int i = 0; i < input.size(); i++){
         printVector(input[i]);
+    }
+    printf("\n");
+}
+
+void printTrie(struct node * root){
+    printf("|");
+    for (int i = 0; i < root->children.size(); i++) {
+        cout << root->children[i]->data << '|';
+    }
+    printf("\n");
+    for (int i = 0; i < root->children.size(); i++) {
+        printf("|");
+        for (int j = 0; j < root->children[i]->children.size(); j++) {
+            cout << root->children[i]->children[j]->data << '|';
+        }
+
     }
     printf("\n");
 }

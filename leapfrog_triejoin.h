@@ -5,7 +5,11 @@
 #ifndef BAPROEF_LEAPFROG_TRIEJOIN_H
 #define BAPROEF_LEAPFROG_TRIEJOIN_H
 
+#include "TrieIterator.h"
+
 struct node * generateTrie(Table, int);
+vector<vector<TrieIterator*>> getTrieTable(vector<TrieIterator*>, vector<int>);
+long long leapfrogTriejoin(vector<vector<TrieIterator*>>& , vector<TrieIterator*> &);
 
 
 #endif //BAPROEF_LEAPFROG_TRIEJOIN_H

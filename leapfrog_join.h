@@ -5,7 +5,12 @@
 #ifndef BAPROEF_LEAPFROG_JOIN_H
 #define BAPROEF_LEAPFROG_JOIN_H
 
-Table leapfrog_join(vector<pair<IndexMap::iterator, Index*>> &iterVec);
+#include "TrieIterator.h"
+
+//Table leapfrog_join(vector<TrieIterator*>);
+void leapfrog_init(vector<TrieIterator*> &);
+bool leapfrog_next(vector<TrieIterator*> &);
+bool isAtEnd(vector<TrieIterator*>&);
 
 #endif //BAPROEF_LEAPFROG_JOIN_H
 

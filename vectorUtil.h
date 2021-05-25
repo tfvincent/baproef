@@ -18,12 +18,26 @@ typedef vector<vector<vector<int>>> QueryPlan;
 typedef pair<int, int> Pair;
 typedef btree::map<int, Tuple*> IndexMap;
 
+
 class Index {
 public:
     Index(Table * table);
     IndexMap index;
     Table * table;
 };
+
+struct node  {
+
+public:
+    int data;
+    int var;
+    int index;
+    struct node * parent;
+    vector<int> vars;
+    vector<struct node *> children;
+};
+
+struct node* newNode(int, struct node *, int, int);
 
 void addData(Table&, Tuple&);
 
@@ -42,5 +56,8 @@ Index * makeIndex(Table* , int);
 void printVector(Tuple const &);
 
 void printTable(Table const &);
+
+void printTrie(struct node *);
+
 
 #endif
