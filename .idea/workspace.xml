@@ -11,20 +11,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94bfb4c4-4fd4-4700-ab99-30540a76f2af" name="Default Changelist" comment="Fixed genericJoin.cpp and added support for tries.">
-      <change afterPath="$PROJECT_DIR$/benchmark.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/benchmark.h" afterDir="false" />
+    <list default="true" id="94bfb4c4-4fd4-4700-ab99-30540a76f2af" name="Default Changelist" comment="Completed leapfrog_join.cpp">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Trie.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TrieIterator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Trie.h" beforeDir="false" afterPath="$PROJECT_DIR$/TrieIterator.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TrieIterator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TrieIterator.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmark.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/benchmark.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmark.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmark.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/join.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/join.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leapfrog_join.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/leapfrog_join.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leapfrog_join.h" beforeDir="false" afterPath="$PROJECT_DIR$/leapfrog_join.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leapfrog_triejoin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/leapfrog_triejoin.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leapfrog_triejoin.h" beforeDir="false" afterPath="$PROJECT_DIR$/leapfrog_triejoin.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vectorUtil.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/vectorUtil.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vectorUtil.h" beforeDir="false" afterPath="$PROJECT_DIR$/vectorUtil.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/timer.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,11 +76,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -115,7 +108,10 @@
       <workItem from="1621770521738" duration="1298000" />
       <workItem from="1621771852068" duration="5313000" />
       <workItem from="1621778455497" duration="2874000" />
-      <workItem from="1621859339335" duration="45770000" />
+      <workItem from="1621859339335" duration="48522000" />
+      <workItem from="1621955025510" duration="153000" />
+      <workItem from="1621955437833" duration="15685000" />
+      <workItem from="1621979992715" duration="1698000" />
     </task>
     <task id="LOCAL-00001" summary="debugged and added new makefile">
       <created>1615731052083</created>
@@ -166,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621264298400</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Completed leapfrog_join.cpp">
+      <created>1621952133870</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1621952133870</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,16 +195,12 @@
     <MESSAGE value="Added Type Aliases" />
     <MESSAGE value="Added Generic Join and Leapfrog join" />
     <MESSAGE value="Fixed genericJoin.cpp and added support for tries." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed genericJoin.cpp and added support for tries." />
+    <MESSAGE value="Completed leapfrog_join.cpp" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed leapfrog_join.cpp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/leapfrog_triejoin.cpp</url>
-          <line>98</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/TrieIterator.cpp</url>
           <line>18</line>
@@ -209,13 +208,48 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/TrieIterator.cpp</url>
-          <line>43</line>
+          <line>46</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/leapfrog_triejoin.cpp</url>
+          <line>95</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/leapfrog_join.cpp</url>
-          <line>19</line>
-          <option name="timeStamp" value="25" />
+          <line>11</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/leapfrog_join.cpp</url>
+          <line>39</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" log-stack="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/leapfrog_join.cpp</url>
+          <line>54</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/leapfrog_triejoin.cpp</url>
+          <line>62</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/leapfrog_triejoin.cpp</url>
+          <line>70</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/TrieIterator.cpp</url>
+          <line>23</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/TrieIterator.cpp</url>
+          <line>52</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

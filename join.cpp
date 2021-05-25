@@ -37,10 +37,8 @@ unsigned long long join(Table relation1, Table relation2, Table relation3){
     QueryPlan queryPlan = findQueryPlan(relation1, relation2, relation3);
     Table result = queryPlan[0];
     for (int i = 1; i < queryPlan.size(); ++i) {
-        result = sortMergeJoin(result, queryPlan[i]);
+        result = nestedLoopJoin(result, queryPlan[i]);
     }
     unsigned long long duration = timer.Stop();
-    cout << "THE RESULT OF JOIN IS:\n";
-    printTable(result);
     return duration;
 }

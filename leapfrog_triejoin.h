@@ -9,7 +9,7 @@
 
 struct node * generateTrie(Table, int);
 vector<vector<TrieIterator*>> getTrieTable(vector<TrieIterator*>, vector<int>);
-long long leapfrogTriejoin(vector<vector<TrieIterator*>>& , vector<TrieIterator*> &);
+void leapfrogTriejoin(vector<vector<TrieIterator*>>& , vector<TrieIterator*> &);
 
 
 #endif //BAPROEF_LEAPFROG_TRIEJOIN_H

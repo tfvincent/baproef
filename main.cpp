@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <iomanip>
 #include "btree.h"
 #include "map.h"
 #include "vectorUtil.h"
@@ -8,6 +9,8 @@
 #include "leapfrog_triejoin.h"
 #include "nestedLoopJoin.h"
 #include "benchmark.h"
+#include "timer.h"
+#include "join.h"
 
 typedef btree::map<int, int> IntMap;
 using namespace std;
@@ -28,9 +31,9 @@ int CountDuplicates() {
     return 2;
 }
 
-int main(){
+int main() {
 
-    Table grades1;
+    /*Table grades1;
     Table grades2;
     Table grades3;
     Table gradesA;
@@ -66,48 +69,32 @@ int main(){
             {60}};
 
     // FIXED: index is on column 1 not zero
-    auto newIndex =  makeIndex(&gradesA, 1);
-    auto newIndex2 =  makeIndex(&gradesB, 1);
+    auto newIndex = makeIndex(&gradesA, 1);
+    auto newIndex2 = makeIndex(&gradesB, 1);
     auto newIndex3 = makeIndex(&gradesC, 1);
 
 
     // FIXED: made pairs of iterator and pointers to Index, otherwise the btree is copied and
     // the .end() will never match with anything!
-    pair<IndexMap::iterator, Index*> indexPair = pair<IndexMap::iterator, Index*>(newIndex->index.begin(),newIndex);
-    pair<IndexMap::iterator, Index*> indexPair2 = pair<IndexMap::iterator, Index*>(newIndex2->index.begin(), newIndex2);
-    pair<IndexMap::iterator, Index*> indexPair3 = pair<IndexMap::iterator, Index*>(newIndex3->index.begin(), newIndex3);
+    pair<IndexMap::iterator, Index *> indexPair = pair<IndexMap::iterator, Index *>(newIndex->index.begin(), newIndex);
+    pair<IndexMap::iterator, Index *> indexPair2 = pair<IndexMap::iterator, Index *>(newIndex2->index.begin(),
+                                                                                     newIndex2);
+    pair<IndexMap::iterator, Index *> indexPair3 = pair<IndexMap::iterator, Index *>(newIndex3->index.begin(),
+                                                                                     newIndex3);
 
 
-
-    vector<pair<IndexMap::iterator, Index*>> indexVec;
+    vector<pair<IndexMap::iterator, Index *>> indexVec;
 
     indexVec.push_back(indexPair);
     indexVec.push_back(indexPair2);
     indexVec.push_back(indexPair3);
 
-    grades1 = {
-            {1, 2},
-            {22, 82},
-            {28, 31},
-            {31, 22},
-            {31, 82},
-            {22, 4},
-            {58, 9}};
-    grades2 = {
-            {2,    3},
-            {82, 103},
-            {82, 104},
-            {82, 101},
-            {4, 101},
-            {82, 142},
-            {82, 107}};
-    grades3 = {
-            {1, 3},
-            {22, 82},
-            {22, 101},
-            {22, 142}};
+    Table * grades1 = generateRandomTable(100, {1,2}, 20);
+    printTable(grades1);
+    Table * grades2 = generateRandomTable(100, {2,3}, 20);
+    Table * grades3 = generateRandomTable(100, {1,3}, 20);
 
-    vector<int> varOrder = {1,2,3};
+    vector<int> varOrder = {1, 2, 3};
 
     example = {
             {1, 2, 3},
@@ -119,32 +106,57 @@ int main(){
             {1, 5, 2},
             {3, 5, 2}
     };
-
+/*
     vector<Table> genericJoinTables;
     genericJoinTables.push_back(grades1);
     genericJoinTables.push_back(grades2);
     genericJoinTables.push_back(grades3);
 
-    HyperGraph * hyperGraph = generateHyperGraph(genericJoinTables);
+    HyperGraph *hyperGraph = generateHyperGraph(genericJoinTables);
 
     printTable(genericJoin(hyperGraph, genericJoinTables, 1));
 
-    struct node * rootNode = generateTrie(grades1, 1);
-    struct node * rootNode1 = generateTrie(grades2, 2);
-    struct node * rootNode2 = generateTrie(grades3, 3);
+    struct node *rootNode = generateTrie(grades1, 1);
+    struct node *rootNode1 = generateTrie(grades2, 2);
+    struct node *rootNode2 = generateTrie(grades3, 3);
 
-    TrieIterator * trie1 = new TrieIterator(rootNode);
-    TrieIterator * trie2 = new TrieIterator(rootNode1);
-    TrieIterator * trie3 = new TrieIterator(rootNode2);
+    TrieIterator *trie1 = new TrieIterator(rootNode);
+    TrieIterator *trie2 = new TrieIterator(rootNode1);
+    TrieIterator *trie3 = new TrieIterator(rootNode2);
 
-    vector<TrieIterator*> tries;
+    vector<TrieIterator *> tries;
     tries.push_back(trie1);
     tries.push_back(trie2);
     tries.push_back(trie3);
 
-    vector<vector<TrieIterator*>> trieTable = getTrieTable(tries, varOrder);
+    vector<vector<TrieIterator *>> trieTable = getTrieTable(tries, varOrder);
 
-    printf("Leapfrog triejoin took: %f ms", leapfrogTriejoin(trieTable, tries));
+    unsigned long long averageLeapfrog = 0;
+    for (int i = 0; i < 1; ++i) {
+        {
+
+            Timer timer("Leapfrog triejoin");
+            leapfrogTriejoin(trieTable, tries);
+            auto duration = timer.Stop();
+            averageLeapfrog = averageLeapfrog + duration;
+        }
+    }
+
+    cout<<setprecision (7) <<"Average time leapfrog trie join: "<< averageLeapfrog << "ns\n";
+
+    unsigned long long average = 0;
+    for (int i = 0; i < 1; ++i) {
+        {
+            Timer timer("Leapfrog triejoin");
+            join(grades1, grades2, grades3);
+            auto duration = timer.Stop();
+            average = average + duration;
+        }
+    }
+
+    cout<<setprecision (7) <<"Average time nested loop join: "<< average << "ns\n";
+
+
     //printTable(nestedLoopJoin()
     printf("Leapfrog triejoin completed");
 
@@ -186,6 +198,118 @@ int main(){
     //  avgJoinTime = avgJoinTime + join(grades1, grades2, grades3);
     //}
     //cout<<setprecision (7) <<"Average time nested loop join: "<< avgJoinTime << "µs\n";
+*/
+    /*********************************************************************************
+     *                                   BENCHMARKING                                *
+     *********************************************************************************/
+    /**
+     * DATA
+     */
+    vector<vector<int>> vars;
+    vector<int> varOrder = {1, 2, 3};
+    vector<int> ij = {1,2};
+    vector<int> ik = {2,3};
+    vector<int> il = {1,3};
+    vars.push_back(ij);
+    vars.push_back(ik);
+    vars.push_back(il);
 
+    /**
+     * BENCHMARKING NORMAL DATA
+     */
+/*
+    printf("Benchmarking on normal data: \n");
+    Table * table = generateRandomTable(10, ij, 20);
+    Table * table2 = generateRandomTable(10, ik, 20);
+    Table * table3 = generateRandomTable(10, il, 20);
+
+    struct node * rootNode = generateTrie(*table, 1);
+    struct node * rootNode1 = generateTrie(*table2, 2);
+    struct node * rootNode2 = generateTrie(*table3, 3);
+
+    TrieIterator *trie1 = new TrieIterator(rootNode);
+    TrieIterator *trie2 = new TrieIterator(rootNode1);
+    TrieIterator *trie3 = new TrieIterator(rootNode2);
+
+    vector<TrieIterator *> tries;
+    tries.push_back(trie1);
+    tries.push_back(trie2);
+    tries.push_back(trie3);
+
+    vector<vector<TrieIterator *>> trieTable = getTrieTable(tries, varOrder);
+
+    unsigned long long averageLeapfrog = 0;
+    for (int i = 0; i < 1; ++i) {
+        {
+            Timer timer("Leapfrog triejoin");
+            leapfrogTriejoin(trieTable, tries);
+            auto duration = timer.Stop();
+            averageLeapfrog = averageLeapfrog + duration;
+        }
+    }
+
+    cout<<setprecision (7) <<"Average time leapfrog trie join on normal data: "<< averageLeapfrog << "ns\n";
+
+    unsigned long long averageNestedNormal = 0;
+    for (int i = 0; i < 1; ++i) {
+        {
+            Timer timer("Leapfrog triejoin");
+            join(*table, *table2, *table3);
+            auto duration = timer.Stop();
+            averageNestedNormal = averageNestedNormal + duration;
+        }
+    }
+
+    cout<<setprecision (7) <<"Average time nested loop join on normal data: "<< averageNestedNormal << "ns\n";
+*/
+    /**
+    * SKEW BENCHMARKING
+    */
+    printf("Benchmarking on skew data: \n");
+
+    vector<Table*> tables = generateSkewTable(100, vars);
+
+    Table * tableSkew1 = tables[0];
+    Table * tableSkew2 = tables[1];
+    Table * tableSkew3 = tables[2];
+
+    struct node * rootNodeSkew = generateTrie(*tableSkew1, 1);
+    struct node * rootNode1Skew = generateTrie(*tableSkew2, 2);
+    struct node * rootNode2Skew = generateTrie(*tableSkew3, 3);
+
+    TrieIterator *trie1Skew = new TrieIterator(rootNodeSkew);
+    TrieIterator *trie2Skew = new TrieIterator(rootNode1Skew);
+    TrieIterator *trie3Skew = new TrieIterator(rootNode2Skew);
+
+    vector<TrieIterator *> triesSkew;
+    triesSkew.push_back(trie1Skew);
+    triesSkew.push_back(trie2Skew);
+    triesSkew.push_back(trie3Skew);
+
+    vector<vector<TrieIterator *>> trieTableSkew = getTrieTable(triesSkew, varOrder);
+
+    unsigned long long averageLeapfrogSkew = 0;
+    for (int i = 0; i < 100; ++i) {
+        {
+            Timer timer("Leapfrog triejoin");
+            leapfrogTriejoin(trieTableSkew, triesSkew);
+            auto duration = timer.Stop();
+            averageLeapfrogSkew = averageLeapfrogSkew + duration;
+        }
+    }
+    cout<<setprecision (7) <<"Average time leapfrog trie join on skew data: "<< averageLeapfrogSkew/100 << "ns\n";
+
+    unsigned long long averageNestedSkew = 0;
+
+    for (int i = 0; i < 100; ++i) {
+        {
+            Timer timer("Leapfrog triejoin");
+            join(*tableSkew1, *tableSkew2, *tableSkew3);
+            auto duration = timer.Stop();
+            averageNestedSkew = averageNestedSkew + duration;
+        }
+    }
+
+    cout<<setprecision (7) <<"Average time nested loop join on skew data: "<< averageNestedSkew/1000000 << " microseconds\n";
     return 0;
 }

@@ -3,10 +3,6 @@
 //
 #include <vector>
 #include <algorithm>
-
-#include "iterator_interface.h"
-#include "map.h"
-#include "vectorUtil.h"
 #include "TrieIterator.h"
 
 static int p;
@@ -40,8 +36,6 @@ void leapfrog_search(vector<TrieIterator*> &iterVec){
     }
 }
 
-
-
 void leapfrog_init(vector<TrieIterator*> &iterVec){
     if (find_if(iterVec.begin(), iterVec.end(), [] (TrieIterator* &a) -> bool {
         return a->atEnd();
@@ -73,5 +67,5 @@ bool leapfrog_next(vector<TrieIterator*> &iterVec){
 }
 
 bool isAtEnd(vector<TrieIterator*> &itervec){
-    return true;
+    return itervec[0]->atEnd() ||itervec[1]->atEnd();
 }

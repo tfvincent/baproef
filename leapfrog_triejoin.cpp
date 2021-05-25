@@ -92,21 +92,26 @@ Tuple getPath(vector<TrieIterator*> &iterVec){
     return result;
 }
 
-long long leapfrogTriejoin(vector<vector<TrieIterator*>> &vars, vector<TrieIterator*> &itervec) {
-    Timer timer("leapfrog_triejoin timer");
+void leapfrogTriejoin(vector<vector<TrieIterator*>> &vars, vector<TrieIterator*> &itervec) {
+    Table result;
     if (depth >= 0) {
-        if (depth < vars.size()){
+        if (depth == 0){
             leapfrogTriejoinOpen(vars[depth]);
             leapfrogTriejoin(vars, itervec);
-            while (leapfrog_next(vars[depth-1])) {
+        }
+        if (depth < vars.size() && (!vars[depth-1][0]->atEnd() && vars[depth-1][1]->atEnd())) {
+            leapfrogTriejoinOpen(vars[depth]);
+            leapfrogTriejoin(vars, itervec);
+            while (leapfrog_next(vars[depth - 1])) {
                 leapfrogTriejoin(vars, itervec);
             }
-            leapfrogTriejoinUp(vars[depth-1]);
+            leapfrogTriejoinUp(vars[depth - 1]);
+
         }
         if (depth == vars.size()) {
             Tuple tmp = getPath(itervec);
             result.push_back(tmp);
         }
     }
-    return timer.Stop();
+    return;
 }

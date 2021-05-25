@@ -7,9 +7,9 @@
 
 #include "vectorUtil.h"
 
-Table generateRandomTable(int, vector<int>, int);
+Table * generateRandomTable(int, vector<int>, int);
 
-Table generateSkewTable(int, vector<int>);
+vector<Table*> generateSkewTable(int, vector<vector<int>>);
 
 
 #endif //BAPROEF_BENCHMARK_H

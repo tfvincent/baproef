@@ -22,5 +22,5 @@ unsigned long long Timer::Stop(){
   auto duration = (stop - start);
 
   m_Stopped = true;
-    return duration;
+  return duration;
 }

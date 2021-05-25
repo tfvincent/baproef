@@ -22,6 +22,9 @@ bool TrieIterator::nextAtEnd(){
 
 void TrieIterator::next() {
     if (!this->nextAtEnd()) {
+        int currentnext = this->parent->children[this->index+1]->data;
+        int currentindex = this->index;
+        int currentval= this->current->index;
         this->index = this->index +1;
         this->current = this->current->parent->children[this->index];
 
@@ -48,10 +51,13 @@ void TrieIterator::seek(int seekKey) {
 
 void TrieIterator::up() {
     struct node * tmp = this->current;
+    int iteratorAt = this->current->data;
     if (this->parent->var != NULL) {
-        this->index = this->parent->index;
-        this->parent = this->parent->parent;
-        this->current = tmp->parent;
+        int indexParent = this->current->parent->index;
+        int parent = this->current->parent->data;
+        this->index = this->current->parent->index;
+        this->parent = this->current->parent->parent;
+        this->current = this->current->parent;
     } else {
         this->current = tmp->parent;
         this->parent = NULL;
