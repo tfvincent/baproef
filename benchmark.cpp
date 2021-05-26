@@ -66,3 +66,42 @@ vector<Table*> generateSkewTable(int rows, vector<vector<int>> vars){
     }
     return tables;
 }
+
+vector<Table*> generateSkewTableUnsorted(int rows, vector<vector<int>> vars){
+
+     vector<Table*> unSortedTables = generateSkewTable(rows, vars);
+
+     for(auto x: unSortedTables){
+         random_shuffle(x->begin(), x->end());
+     }
+
+     return unSortedTables;
+}
+
+vector<Table*> generateNoSolutionSkew(int rows, vector<vector<int>> vars){
+    vector<Table*> tables;
+    Tuple table0 = {1,2};
+    Tuple table1 = {2,3};
+    Tuple table2 = {1,3};
+
+    for (int i = 0; i < vars.size(); ++i) {
+        Table * table = new Table ();
+        table->push_back(vars[i]);
+        for (int j = 0; j < rows; ++j) {
+            Tuple tuple;
+            if (vars[i] == table0){
+                tuple.push_back(7);
+                tuple.push_back(j);
+            } else if (vars[i] == table1){
+                tuple.push_back(j);
+                tuple.push_back(j);
+            } else {
+                tuple.push_back(7);
+                tuple.push_back(j+rows);
+            }
+            table->push_back(tuple);
+        }
+        tables.push_back(table);
+    }
+    return tables;
+}

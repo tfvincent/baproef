@@ -10,7 +10,7 @@
 //Table leapfrog_join(vector<TrieIterator*>);
 void leapfrog_init(vector<TrieIterator*> &);
 bool leapfrog_next(vector<TrieIterator*> &);
-bool isAtEnd(vector<TrieIterator*>&);
+bool isAtEnd();
 
 #endif //BAPROEF_LEAPFROG_JOIN_H
 

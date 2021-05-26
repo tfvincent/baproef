@@ -11,5 +11,8 @@ Table * generateRandomTable(int, vector<int>, int);
 
 vector<Table*> generateSkewTable(int, vector<vector<int>>);
 
+vector<Table*> generateSkewTableUnsorted(int, vector<vector<int>>);
+
+vector<Table*> generateNoSolutionSkew(int , vector<vector<int>> );
 
 #endif //BAPROEF_BENCHMARK_H

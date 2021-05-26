@@ -7,6 +7,7 @@
 #include "leapfrog_join.h"
 #include "timer.h"
 #include "benchmark.h"
+#include <random>
 
 int depth = 0;
 Table result;
@@ -16,11 +17,14 @@ struct node * addNodes(struct node * root, vector<int> data, int index, Tuple va
         if (find_if(root->children.begin(), root->children.end(), [data, index] (struct node * a) -> bool {
             return a->data == data[index];
         }) == root->children.end()){
-            struct node* child = newNode(data[index], root, vars[index], index);
+            struct node* child = newNode(data[index], root, vars[index], root->children.size());
             root->children.push_back(child);
             sort(root->children.begin(), root->children.end(), [](struct node * a, struct node * b){
                 return a->data < b->data;
             });
+            for (int i = 0; i < root->children.size(); ++i) {
+                root->children[i]->index = i;
+            }
             addNodes(child, data, index + 1, vars);
         } else {
             auto it =  find_if(root->children.begin(), root->children.end(), [data, index] (struct node * a) -> bool {
@@ -80,6 +84,17 @@ vector<Table *> restartSkewTables(int size, Table vars){
     return tables;
 }
 
+vector<Table *> restartSkewTablesUnsorted(int size, Table vars) {
+    vector<Table*> tables;
+    auto engine = default_random_engine{};
+    tables = restartSkewTables(size, vars);
+    for (auto * x: tables){
+        std::shuffle(begin(*x)+1, end(*x), engine);
+    }
+
+    return tables;
+}
+
 void restartDepth(){
     depth = 0;
 }
@@ -131,26 +146,24 @@ Tuple getPath(vector<TrieIterator*> &iterVec){
     return result;
 }
 
-void leapfrogTriejoin(vector<vector<TrieIterator*>> &vars, vector<TrieIterator*> &itervec) {
+Table leapfrogTriejoin(vector<vector<TrieIterator*>> &vars, vector<TrieIterator*> &itervec) {
     Table result;
     if (depth >= 0) {
-        if (depth == 0){
+        if (depth < vars.size()) {
             leapfrogTriejoinOpen(vars[depth]);
-            leapfrogTriejoin(vars, itervec);
-        }
-        if (depth < vars.size() && (!vars[depth-1][0]->atEnd() && vars[depth-1][1]->atEnd())) {
-            leapfrogTriejoinOpen(vars[depth]);
-            leapfrogTriejoin(vars, itervec);
-            while (leapfrog_next(vars[depth - 1])) {
+            if (!isAtEnd()) {
                 leapfrogTriejoin(vars, itervec);
+                while (leapfrog_next(vars[depth - 1])) {
+                    leapfrogTriejoin(vars, itervec);
+                }
+
             }
             leapfrogTriejoinUp(vars[depth - 1]);
-
         }
         if (depth == vars.size()) {
             Tuple tmp = getPath(itervec);
             result.push_back(tmp);
         }
     }
-    return;
+    return result;
 }

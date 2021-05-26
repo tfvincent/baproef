@@ -26,19 +26,19 @@ QueryPlan findQueryPlan(Table relation1, Table relation2, Table relation3){
     queryPlan.push_back(relation2);
     queryPlan.push_back(relation3);
     sort(queryPlan.begin(), queryPlan.end(), [] (Table a, Table b){
-    return a[0] < b[0];
+    return a[0][0] < b[0][0];
     });
     return queryPlan;
 }
 
 
-unsigned long long join(Table relation1, Table relation2, Table relation3){
+Table join(Table relation1, Table relation2, Table relation3, Table (*func)(Table, Table)){
     Timer timer("Joining query");
     QueryPlan queryPlan = findQueryPlan(relation1, relation2, relation3);
     Table result = queryPlan[0];
     for (int i = 1; i < queryPlan.size(); ++i) {
-        result = nestedLoopJoin(result, queryPlan[i]);
+        result = (*func)(result, queryPlan[i]);
     }
     unsigned long long duration = timer.Stop();
-    return duration;
+    return result;
 }

@@ -12,9 +12,10 @@ vector<TrieIterator*> restartTrieIterators(vector<struct node *>);
 vector<struct node *> restartNodes(vector<Table*>);
 vector<Table*> restartTables(int , Table, int);
 vector<Table*> restartSkewTables(int, Table);
+vector<Table *> restartSkewTablesUnsorted(int, Table);
 void restartDepth();
 vector<vector<TrieIterator*>> getTrieTable(vector<TrieIterator*>, vector<int>);
-void leapfrogTriejoin(vector<vector<TrieIterator*>>& , vector<TrieIterator*> &);
+Table leapfrogTriejoin(vector<vector<TrieIterator*>>& , vector<TrieIterator*> &);
 
 
 #endif //BAPROEF_LEAPFROG_TRIEJOIN_H

@@ -23,7 +23,6 @@ void TrieIterator::next() {
     if (!this->nextAtEnd()) {
         this->index = this->index +1;
         this->current = this->current->parent->children[this->index];
-
     } else {
         this->index = this->index +1;
     }

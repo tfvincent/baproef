@@ -9,4 +9,4 @@
 
 HyperGraph * generateHyperGraph(vector<Table>&);
 
- Table genericJoin(HyperGraph *, vector<Table >&, int);
+Table genericJoin(HyperGraph *, vector<Table >&, int);

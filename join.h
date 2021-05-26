@@ -16,7 +16,7 @@
 
 QueryPlan findQueryPlan(Table, Table, Table);
 
-unsigned long long join(Table, Table, Table);
+Table join(Table, Table, Table, Table (*func)(Table, Table));
 
 
 #endif //BAPROEF_JOIN_H

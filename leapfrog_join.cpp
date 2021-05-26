@@ -66,6 +66,6 @@ bool leapfrog_next(vector<TrieIterator*> &iterVec){
     }
 }
 
-bool isAtEnd(vector<TrieIterator*> &itervec){
-    return itervec[0]->atEnd() ||itervec[1]->atEnd();
+bool isAtEnd(){
+    return theEnd;
 }
