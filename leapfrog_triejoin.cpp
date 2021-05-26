@@ -6,6 +6,7 @@
 #include "TrieIterator.h"
 #include "leapfrog_join.h"
 #include "timer.h"
+#include "benchmark.h"
 
 int depth = 0;
 Table result;
@@ -43,6 +44,44 @@ struct node * generateTrie(Table table, int c){
         addNodes(rootNode, table[i], 0, table[0]);
     }
     return rootNode;
+}
+
+vector<TrieIterator*> restartTrieIterators(vector<struct node *> nodes){
+    vector<TrieIterator*> trieIts;
+    for (int i = 0; i < nodes.size(); ++i) {
+        TrieIterator *trieIt = new TrieIterator(nodes[i]);
+        trieIts.push_back(trieIt);
+    }
+    return trieIts;
+}
+
+vector<struct node *> restartNodes(vector<Table*> tables){
+    vector<struct node *> nodes;
+    for (int i = 0; i < tables.size(); ++i) {
+        struct node * rootNode = generateTrie(*tables[i], i+1);
+        nodes.push_back(rootNode);
+    }
+    return nodes;
+}
+
+vector<Table*> restartTables(int size, Table vars, int datasize){
+    vector<Table*> tables;
+    for (int i = 0; i < vars.size(); ++i) {
+        Table * table = new Table ();
+        table = generateRandomTable(size, vars[i], datasize);
+        tables.push_back(table);
+    }
+    return tables;
+}
+
+vector<Table *> restartSkewTables(int size, Table vars){
+    vector<Table*> tables;
+    tables = generateSkewTable(size, vars);
+    return tables;
+}
+
+void restartDepth(){
+    depth = 0;
 }
 
 vector<vector<TrieIterator*>> getTrieTable(vector<TrieIterator*> tries, vector<int> varOrder){

@@ -3,7 +3,6 @@
 //
 
 #include "TrieIterator.h"
-#include <stdbool.h>
 
 TrieIterator::TrieIterator(struct node * root){
     this->current = root;
@@ -22,9 +21,6 @@ bool TrieIterator::nextAtEnd(){
 
 void TrieIterator::next() {
     if (!this->nextAtEnd()) {
-        int currentnext = this->parent->children[this->index+1]->data;
-        int currentindex = this->index;
-        int currentval= this->current->index;
         this->index = this->index +1;
         this->current = this->current->parent->children[this->index];
 
@@ -53,8 +49,6 @@ void TrieIterator::up() {
     struct node * tmp = this->current;
     int iteratorAt = this->current->data;
     if (this->parent->var != NULL) {
-        int indexParent = this->current->parent->index;
-        int parent = this->current->parent->data;
         this->index = this->current->parent->index;
         this->parent = this->current->parent->parent;
         this->current = this->current->parent;
@@ -65,10 +59,10 @@ void TrieIterator::up() {
     }
 }
 
-int TrieIterator::getRootVar(){
+struct node * TrieIterator::getRootVar(){
     struct node * curr = this->current;
     while (curr->parent->var != NULL) {
         curr = curr->parent;
     }
-    return curr->data;
+    return curr;
 }

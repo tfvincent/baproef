@@ -205,111 +205,111 @@ int main() {
     /**
      * DATA
      */
-    vector<vector<int>> vars;
-    vector<int> varOrder = {1, 2, 3};
-    vector<int> ij = {1,2};
-    vector<int> ik = {2,3};
-    vector<int> il = {1,3};
-    vars.push_back(ij);
-    vars.push_back(ik);
-    vars.push_back(il);
+        int size = 100;
+        int datasize = 20;
+        vector<vector<int>> vars;
+        vector<int> varOrder = {1, 2, 3};
+        vector<int> ij = {1,2};
+        vector<int> ik = {2,3};
+        vector<int> il = {1,3};
+        vars.push_back(ij);
+        vars.push_back(ik);
+        vars.push_back(il);
 
-    /**
-     * BENCHMARKING NORMAL DATA
-     */
-/*
-    printf("Benchmarking on normal data: \n");
-    Table * table = generateRandomTable(10, ij, 20);
-    Table * table2 = generateRandomTable(10, ik, 20);
-    Table * table3 = generateRandomTable(10, il, 20);
-
-    struct node * rootNode = generateTrie(*table, 1);
-    struct node * rootNode1 = generateTrie(*table2, 2);
-    struct node * rootNode2 = generateTrie(*table3, 3);
-
-    TrieIterator *trie1 = new TrieIterator(rootNode);
-    TrieIterator *trie2 = new TrieIterator(rootNode1);
-    TrieIterator *trie3 = new TrieIterator(rootNode2);
-
-    vector<TrieIterator *> tries;
-    tries.push_back(trie1);
-    tries.push_back(trie2);
-    tries.push_back(trie3);
-
-    vector<vector<TrieIterator *>> trieTable = getTrieTable(tries, varOrder);
-
-    unsigned long long averageLeapfrog = 0;
-    for (int i = 0; i < 1; ++i) {
-        {
-            Timer timer("Leapfrog triejoin");
-            leapfrogTriejoin(trieTable, tries);
-            auto duration = timer.Stop();
-            averageLeapfrog = averageLeapfrog + duration;
-        }
-    }
-
-    cout<<setprecision (7) <<"Average time leapfrog trie join on normal data: "<< averageLeapfrog << "ns\n";
-
-    unsigned long long averageNestedNormal = 0;
-    for (int i = 0; i < 1; ++i) {
-        {
-            Timer timer("Leapfrog triejoin");
-            join(*table, *table2, *table3);
-            auto duration = timer.Stop();
-            averageNestedNormal = averageNestedNormal + duration;
-        }
-    }
-
-    cout<<setprecision (7) <<"Average time nested loop join on normal data: "<< averageNestedNormal << "ns\n";
-*/
     /**
     * SKEW BENCHMARKING
     */
     printf("Benchmarking on skew data: \n");
 
-    vector<Table*> tables = generateSkewTable(100, vars);
-
-    Table * tableSkew1 = tables[0];
-    Table * tableSkew2 = tables[1];
-    Table * tableSkew3 = tables[2];
-
-    struct node * rootNodeSkew = generateTrie(*tableSkew1, 1);
-    struct node * rootNode1Skew = generateTrie(*tableSkew2, 2);
-    struct node * rootNode2Skew = generateTrie(*tableSkew3, 3);
-
-    TrieIterator *trie1Skew = new TrieIterator(rootNodeSkew);
-    TrieIterator *trie2Skew = new TrieIterator(rootNode1Skew);
-    TrieIterator *trie3Skew = new TrieIterator(rootNode2Skew);
-
-    vector<TrieIterator *> triesSkew;
-    triesSkew.push_back(trie1Skew);
-    triesSkew.push_back(trie2Skew);
-    triesSkew.push_back(trie3Skew);
-
-    vector<vector<TrieIterator *>> trieTableSkew = getTrieTable(triesSkew, varOrder);
-
     unsigned long long averageLeapfrogSkew = 0;
     for (int i = 0; i < 100; ++i) {
         {
+            vector<Table*> tablesNormalSkew = restartSkewTables(size, vars);
+            vector<struct node *> rootNodesNewSkew = restartNodes(tablesNormalSkew);
+            vector<TrieIterator*> triesSkew = restartTrieIterators(rootNodesNewSkew);
+            vector<vector<TrieIterator*>> trieTableSkew = getTrieTable(triesSkew, varOrder);
+            restartDepth();
+
             Timer timer("Leapfrog triejoin");
             leapfrogTriejoin(trieTableSkew, triesSkew);
             auto duration = timer.Stop();
-            averageLeapfrogSkew = averageLeapfrogSkew + duration;
+            if (i > 1) {
+                averageLeapfrogSkew = averageLeapfrogSkew + duration;
+            }
+            printf("Leapfrog triejoin on skew data took %d nanseconds on run %d\n", duration, i);
         }
     }
-    cout<<setprecision (7) <<"Average time leapfrog trie join on skew data: "<< averageLeapfrogSkew/100 << "ns\n";
+    printf("\n");
+    cout<<setprecision (7) <<"Average time leapfrog trie join on skew data: "<< averageLeapfrogSkew/98 << "ns\n";
+    printf("\n");
 
     unsigned long long averageNestedSkew = 0;
-
     for (int i = 0; i < 100; ++i) {
         {
+            vector<Table*> tablesSkew = restartSkewTables(size, vars);
+            Table * table1Skew = tablesSkew[0];
+            Table * table2Skew = tablesSkew[1];
+            Table * table3Skew = tablesSkew[2];
             Timer timer("Leapfrog triejoin");
-            join(*tableSkew1, *tableSkew2, *tableSkew3);
+            join(*table1Skew, *table2Skew, *table3Skew);
             auto duration = timer.Stop();
-            averageNestedSkew = averageNestedSkew + duration;
+            if (i > 1) {
+                averageNestedSkew = averageNestedSkew + duration;
+            }
+            printf("NestedLoop join on skew data took %d nanseconds on run %d\n", duration, i);
+
         }
     }
+    printf("\n");
+    cout<<setprecision (7) <<"Average time nested loop join on skew data: "<< averageNestedSkew/98 << " nanoseconds\n";
+    printf("\n");
 
-    cout<<setprecision (7) <<"Average time nested loop join on skew data: "<< averageNestedSkew/1000000 << " microseconds\n";
+    /**
+     * BENCHMARKING NORMAL DATA
+     */
+    unsigned long long averageLeapfrog = 0;
+    for (int i = 0; i < 100; ++i) {
+        {
+            vector<Table*> tablesNormal = restartTables(size, vars, datasize);
+            vector<struct node *> rootNodesNew = restartNodes(tablesNormal);
+            vector<TrieIterator*> tries = restartTrieIterators(rootNodesNew);
+            vector<vector<TrieIterator*>> trieTable = getTrieTable(tries, varOrder);
+            restartDepth();
+
+            Timer timer("Leapfrog triejoin");
+            leapfrogTriejoin(trieTable, tries);
+            auto duration = timer.Stop();
+            if (i > 1) {
+                averageLeapfrog = averageLeapfrog + duration;
+            }
+            printf("Leapfrog triejoin on normal data took %d nanseconds on run %d\n", duration, i);
+
+        }
+    }
+    printf("\n");
+    cout<<setprecision (7) <<"Average time leapfrog trie join on normal data: "<< averageLeapfrog/98 << "ns\n";
+    printf("\n");
+
+    unsigned long long averageNestedNormal = 0;
+    for (int i = 0; i < 100; ++i) {
+        {
+            vector<Table*> tablesNormal = restartTables(size, vars, datasize);
+            Table * table1 = tablesNormal[0];
+            Table * table2 = tablesNormal[1];
+            Table * table3 = tablesNormal[2];
+            Timer timer("Leapfrog triejoin");
+            join(*table1, *table2, *table3);
+            auto duration = timer.Stop();
+            if (i > 1) {
+                averageNestedNormal = averageNestedNormal + duration;
+            }
+            printf("NestedLoop join on normal data took %d nanseconds on run %d\n", duration, i);
+
+        }
+    }
+    printf("\n");
+    cout<<setprecision (7) <<"Average time nested loop join on normal data: "<< averageNestedNormal/98 << "ns\n";
+    printf("\n");
+
     return 0;
 }

@@ -19,7 +19,7 @@ public:
     void next();
     void open();
     void up();
-    int getRootVar();
+    struct node * getRootVar();
 };
 
 

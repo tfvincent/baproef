@@ -7,6 +7,7 @@
 Table * generateRandomTable(int rows, vector<int> vars, int datasize){
     Table * table = new Table();
     table->push_back(vars);
+    srand(time (0));
     for (int i = 1; i < rows; ++i) {
         Tuple tuple;
         for (int j = 0; j < vars.size(); ++j) {
